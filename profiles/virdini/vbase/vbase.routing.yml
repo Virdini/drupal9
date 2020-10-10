@@ -1,0 +1,119 @@
+vbase.site_settings:
+  path: '/admin/config/system/site-settings'
+  defaults:
+    _form: 'Drupal\vbase\Form\BaseSiteSettings'
+    _title: 'Main Site Settings'
+  requirements:
+    _permission: 'vbase site settings'
+
+vbase.tags_settings:
+  path: '/admin/config/system/site-settings/tags-settings'
+  defaults:
+    _form: 'Drupal\vbase\Form\TagsSettings'
+    _title: 'Tags Settings'
+  requirements:
+    _permission: 'vbase site settings'
+
+vbase.content_protection:
+  path: '/admin/config/system/site-settings/content-protection'
+  defaults:
+    _form: 'Drupal\vbase\Form\ContentProtectionSettings'
+    _title: 'Content Protection'
+  requirements:
+    _permission: 'vbase content protection settings'
+
+vbase.settings.antispam:
+  path: '/admin/config/system/site-settings/antispam'
+  defaults:
+    _form: 'Drupal\vbase\Form\AntiSpamSettings'
+    _title: 'Anti Spam'
+  requirements:
+    _permission: 'vbase antispam settings'
+
+vbase.settings.browsers:
+  path: '/admin/config/system/site-settings/browsers'
+  defaults:
+    _form: 'Drupal\vbase\Form\BrowsersSupportSettings'
+    _title: 'Browsers Support'
+  requirements:
+    _permission: 'vbase site settings'
+
+vbase.settings.manifest:
+  path: '/admin/config/system/site-settings/manifest'
+  defaults:
+    _form: 'Drupal\vbase\Form\ManifestSettings'
+    _title: 'Manifest Settings'
+  requirements:
+    _permission: 'vbase site settings'
+
+vbase.settings.users:
+  path: '/admin/config/system/site-settings/users'
+  defaults:
+    _form: 'Drupal\vbase\Form\UserManagement'
+    _title: 'User Management'
+  requirements:
+    _permission: 'vbase user settings'
+
+vbase.manifest:
+  path: '/manifest.json'
+  defaults:
+    _controller: '\Drupal\vbase\Controller\Manifest::build'
+    _title: 'Manifest'
+  requirements:
+    _access: 'TRUE'
+
+vbase.export_config:
+  path: '/admin/config/development/configuration/full/vbase-batch'
+  defaults:
+    _form: '\Drupal\vbase\Form\ConfigBatchExport'
+    _title: 'Batch Export'
+  requirements:
+    _permission: 'export configuration'
+
+vbase.export_config_download:
+  path: '/admin/config/development/configuration/full/vbase-batch-download'
+  defaults:
+    _controller: '\Drupal\vbase\Controller\ConfigBatchExportDownload::download'
+    _title: 'Batch Export Download'
+  requirements:
+    _permission: 'export configuration'
+
+vbase.adjustment:
+  path: '/virdini-adjustment'
+  defaults:
+    _controller: '\Drupal\vbase\Controller\VBaseAdjustment::virdini'
+    _title: 'Virdini Design Adjustment Page'
+  requirements:
+    _permission: 'vbase virdini adjustment'
+
+vbase.adjustment_tab_1:
+  path: '/virdini-adjustment/tab_1'
+  defaults:
+    _controller: '\Drupal\vbase\Controller\VBaseAdjustment::virdini'
+    _title: 'Virdini Design Adjustment Page'
+  requirements:
+    _permission: 'vbase virdini adjustment'
+
+vbase.adjustment_tab_1_1:
+  path: '/virdini-adjustment/tab_1/1'
+  defaults:
+    _controller: '\Drupal\vbase\Controller\VBaseAdjustment::virdini'
+    _title: 'Virdini Design Adjustment Page'
+  requirements:
+    _permission: 'vbase virdini adjustment'
+
+vbase.adjustment_tab_1_2:
+  path: '/virdini-adjustment/tab_1/2'
+  defaults:
+    _controller: '\Drupal\vbase\Controller\VBaseAdjustment::virdini'
+    _title: 'Virdini Design Adjustment Page'
+  requirements:
+    _permission: 'vbase virdini adjustment'
+
+vbase.adjustment_tab_1_3:
+  path: '/virdini-adjustment/tab_1/3'
+  defaults:
+    _controller: '\Drupal\vbase\Controller\VBaseAdjustment::virdini'
+    _title: 'Virdini Design Adjustment Page'
+  requirements:
+    _permission: 'vbase virdini adjustment'

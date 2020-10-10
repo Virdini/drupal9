@@ -1,0 +1,7 @@
+vtech.settings.developers:
+  path: '/admin/config/development/developers'
+  defaults:
+    _form: 'Drupal\vtech\Form\DevelopersSettings'
+    _title: 'Developers'
+  requirements:
+    _permission: 'vbase site settings'

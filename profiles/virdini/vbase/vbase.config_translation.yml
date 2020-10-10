@@ -1,0 +1,11 @@
+vbase.site_settings:
+  title: 'Main Site Settings'
+  base_route_name: vbase.site_settings
+  names:
+    - system.site
+
+vbase.settings.manifest:
+  title: 'Manifest Settings'
+  base_route_name: vbase.settings.manifest
+  names:
+    - vbase.settings.manifest

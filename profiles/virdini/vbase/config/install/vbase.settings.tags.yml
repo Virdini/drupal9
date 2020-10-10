@@ -1,0 +1,7 @@
+langcode: en
+generator: false
+mobile: true
+viewport: true
+telephone: true
+shortlink: false
+base: ''

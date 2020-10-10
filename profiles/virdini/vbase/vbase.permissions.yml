@@ -1,0 +1,27 @@
+vbase virdini adjustment:
+  title: 'Access to virdini adjustment pages'
+  description: ''
+
+vbase site settings:
+  title: 'Administer Main Site Settings'
+  description: ''
+  restrict access: true
+
+vbase view protected content:
+  title: 'Access to protected content'
+  description: ''
+
+vbase content protection settings:
+  title: 'Administer Content Protection Settings'
+  description: ''
+  restrict access: true
+
+vbase antispam settings:
+  title: 'Administer anti spam settings'
+  description: ''
+
+vbase delayed publishing all:
+  title: 'Access to all delayed publishing fields'
+
+permission_callbacks:
+  - Drupal\vbase\NodePermissions::nodeTypePermissions

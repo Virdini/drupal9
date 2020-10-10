@@ -1,0 +1,12 @@
+vtech.settings.developers:
+  title: 'Developers'
+  parent: system.admin_config_development
+  description: ''
+  route_name: vtech.settings.developers
+
+vtech.toolbar.virdini:
+  title: 'Virdini.com'
+  url: 'https://virdini.com'
+  menu_name: admin
+  parent: admin_toolbar_tools.help
+  weight: -99

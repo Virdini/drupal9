@@ -1,0 +1,107 @@
+vbase.settings.tags:
+  type: config_object
+  label: 'Tags Settings'
+  mapping:
+    generator:
+      type: boolean
+      label: 'Show generator metatag'
+    mobile:
+      type: boolean
+      label: 'Show mobile optimized metatags'
+    viewport:
+      type: boolean
+      label: 'Show viewport metatag'
+    telephone:
+      type: boolean
+      label: 'Telephone detection'
+    shortlink:
+      type: boolean
+      label: 'Show shortlink'
+    base:
+      type: string
+      label: 'Canonical Base Url'
+
+vbase.settings.cp:
+  type: config_object
+  label: 'Content Protection'
+  mapping:
+    node_bundles:
+      label: 'Node Bundles'
+      type: sequence
+      sequence:
+        type: string
+        label: 'Node Bundle'
+    taxonomy_vocabularies:
+      label: 'Taxonomy Vocabularies'
+      type: sequence
+      sequence:
+        type: string
+        label: 'Taxonomy Vocabulary'
+
+vbase.settings.antispam:
+  type: config_object
+  label: 'Anti Spam'
+  mapping:
+    site_key:
+      type: string
+      label: 'Site Key'
+    secret_key:
+      type: string
+      label: 'Secret Key'
+    forms:
+      label: 'Forms'
+      type: sequence
+      sequence:
+        type: string
+        label: 'Form Id'
+
+vbase.settings.browsers:
+  type: config_object
+  label: 'Browsers Support'
+  mapping:
+    ie:
+      type: string
+      label: 'Internet Explorer'
+
+vbase.settings.manifest:
+  type: config_object
+  label: 'Manifest Settings'
+  mapping:
+    short_name:
+      translatable: true
+      type: label
+      label: 'Short Name'
+    name:
+      translatable: true
+      type: label
+      label: 'Name'
+    description:
+      translatable: true
+      type: label
+      label: 'Description'
+    theme_color:
+      type: string
+      label: 'Theme Color'
+    background_color:
+      type: string
+      label: 'Background Color'
+    mask_icon_color:
+      type: string
+      label: 'Mask-icon Color'
+    display:
+      type: string
+      label: 'Display'
+    orientation:
+      type: string
+      label: 'Orientation'
+
+vbase.settings.users:
+  type: config_object
+  label: 'User Management'
+  mapping:
+    login_by_email:
+      type: boolean
+      label: 'Log in by Email'
+    register_by_email:
+      type: boolean
+      label: 'Register by Email'

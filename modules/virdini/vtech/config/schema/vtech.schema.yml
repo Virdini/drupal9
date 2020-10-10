@@ -1,0 +1,22 @@
+vtech.settings.developers:
+  type: config_object
+  label: 'Developers Settings'
+  mapping:
+    nofollow:
+      type: boolean
+      label: 'Nofollow'
+    developed:
+      type: boolean
+      label: 'Developed'
+    maintained:
+      type: boolean
+      label: 'Maintained'
+    label:
+      type: boolean
+      label: 'Label'
+    width:
+      type: integer
+      label: 'Width'
+    logo:
+      type: string
+      label: 'Logo'

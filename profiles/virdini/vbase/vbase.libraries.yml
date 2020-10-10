@@ -1,0 +1,74 @@
+youtube:
+  css:
+    component:
+      css/youtube.css: {}
+
+developers.settings:
+  css:
+    component:
+      css/developers.settings.css: {}
+  js:
+    js/developers.settings.js: {}
+
+FlexSlider:
+  remote: https://github.com/woocommerce/FlexSlider
+  version: "2.7.2"
+  license:
+    name: GNU-GPL-2.0
+    url: https://github.com/woocommerce/FlexSlider/blob/2.7.2/LICENSE.md
+    gpl-compatible: true
+  css:
+    component:
+      /libraries/FlexSlider/flexslider.css: {}
+  js:
+    /libraries/FlexSlider/jquery.flexslider-min.js: {minified: true}
+  dependencies:
+    - core/jquery
+
+jarallax:
+  remote: https://github.com/nk-o/jarallax
+  version: "v1.12.4"
+  license:
+    name: MIT
+    url: https://github.com/nk-o/jarallax/blob/v1.12.4/LICENSE
+    gpl-compatible: true
+  js:
+    /libraries/jarallax/jarallax.min.js: {minified: true}
+
+antispam:
+  js:
+    js/antispam.js: {}
+  dependencies:
+    - core/jquery
+
+ie.unsupported:
+  css:
+    component:
+      css/ie/all.css: {minified: true}
+      css/ie/_all.css: {browsers: { IE: 'IE', '!IE': false }, minified: true}
+
+ie.11:
+  css:
+    component:
+      css/ie/11.css: {minified: true}
+      css/ie/_11.css: {browsers: { IE: 'IE', '!IE': false }, minified: true}
+
+ie.10:
+  css:
+    component:
+      css/ie/10.css: { browsers: { IE: 'IE', '!IE': false }, minified: true }
+
+ie.9:
+  css:
+    component:
+      css/ie/9.css: { browsers: { IE: 'lt IE 9', '!IE': false }, minified: true }
+
+ie.8:
+  css:
+    component:
+      css/ie/8.css: { browsers: { IE: 'lt IE 8', '!IE': false }, minified: true }
+
+ie.7:
+  css:
+    component:
+      css/ie/7.css: { browsers: { IE: 'lt IE 7', '!IE': false }, minified: true }

@@ -1,0 +1,13 @@
+developers.settings:
+  css:
+    component:
+      css/developers.settings.css: {}
+  js:
+    js/developers.settings.js: {}
+
+toolbar.icon:
+  css:
+    theme:
+      css/toolbar.icon.css: {}
+  dependencies:
+    - admin_toolbar_tools/toolbar.icon

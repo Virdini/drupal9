@@ -769,7 +769,18 @@ $settings['migrate_node_migrate_type_classic'] = FALSE;
  *
  * Keep this code block at the end of this file to take full effect.
  */
-#
-# if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
-#   include $app_root . '/' . $site_path . '/settings.local.php';
-# }
+if (file_exists($app_root . '/' . $site_path . '/dev.settings.php')) {
+  include $app_root . '/' . $site_path . '/dev.settings.php';
+}
+
+$settings['file_temp_path'] = 'sites/default/files/tmp';
+$settings['file_chmod_directory'] = 0755;
+$settings['file_chmod_file'] = 0644;
+
+/**
+ * Remote Database.
+ *
+ * 'pdo' => [
+ *   PDO::MYSQL_ATTR_COMPRESS => 1,
+ *  ],
+ */
