@@ -374,8 +374,8 @@ function vbase_file_validate(FileInterface $file) {
   // Force lowercase to prevent issues on case-insensitive file systems.
   $filename_fixed = mb_strtolower($filename_fixed);
   if ($filename != $filename_fixed) {
-    $directory = drupal_dirname($file->destination);
-    $file->destination = file_create_filename($filename_fixed, $directory);
+    $directory = \Drupal::service('file_system')->dirname($file->destination);
+    $file->destination = \Drupal::service('file_system')->createFilename($filename_fixed, $directory);
   }
   return $errors;
 }
