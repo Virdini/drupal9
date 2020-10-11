@@ -66,7 +66,7 @@ function vbase_tokens($type, array $tokens, array $data = array(), array $option
             $term = \Drupal::EntityTypeManager()->getStorage('taxonomy_term')->load($tid);
             $bubbleable_metadata->addCacheableDependency($term);
             $path = '/'. $term->toUrl()->getInternalPath();
-            $alias = \Drupal::service('path.alias_manager')->getAliasByPath($path, $langcode);
+            $alias = \Drupal::service('path_alias.manager')->getAliasByPath($path, $langcode);
             if ($path != $alias) {
               $replacements[$original] = ltrim($alias, '/');
             }
@@ -85,7 +85,7 @@ function vbase_tokens($type, array $tokens, array $data = array(), array $option
             $parent = array_pop($parents);
             $bubbleable_metadata->addCacheableDependency($parent);
             $path = '/'. $parent->toUrl()->getInternalPath();
-            $alias = \Drupal::service('path.alias_manager')->getAliasByPath($path, $langcode);
+            $alias = \Drupal::service('path_alias.manager')->getAliasByPath($path, $langcode);
             if ($path != $alias) {
               $replacements[$original] = ltrim($alias, '/');
               $pattern = \Drupal::service('pathauto.generator')->getPatternByEntity($parent)->getPattern();

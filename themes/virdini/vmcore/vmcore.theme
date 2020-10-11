@@ -18,7 +18,7 @@ function vmcore_preprocess_html(&$variables) {
   $route = \Drupal::routeMatch();
   switch ($route->getRouteName()) {
     case 'entity.taxonomy_term.canonical':
-      $variables['attributes']['class'][] = 'voc-'. $route->getParameter('taxonomy_term')->getVocabularyId();
+      $variables['attributes']['class'][] = 'voc-'. $route->getParameter('taxonomy_term')->bundle();
       break;
   }
 }
