@@ -17,7 +17,6 @@ use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Render\Element\Email;
-use Drupal\user\UserInterface;
 
 /**
  * Implements hook_form_FORM_ID_alter() for install_configure_form().
@@ -243,7 +242,7 @@ function vbase_form_alter(&$form, FormStateInterface $form_state, $form_id) {
     vbase_add_cacheable_dependency($form, $config);
     if ($config->get('register_by_email')) {
       $form['account']['name']['#type'] = 'value';
-      $form['account']['name']['#value'] = 'vbase_' . user_password();
+      $form['account']['name']['#value'] = \Drupal::service('vbase.generator')->userName('vbase_');
     }
   }
   elseif ($form_id == 'user_login_form') {
@@ -258,6 +257,7 @@ function vbase_form_alter(&$form, FormStateInterface $form_state, $form_id) {
       $form['pass']['#description'] = t('Enter the password that accompanies your email address.');
     }
   }
+  // Antispam
   $config = \Drupal::config('vbase.settings.antispam');
   vbase_add_cacheable_dependency($form, $config);
   if ($config->get('site_key') && $config->get('secret_key')
@@ -294,24 +294,7 @@ function vbase_user_presave(EntityInterface $entity) {
       || !\Drupal::config('vbase.settings.users')->get('register_by_email')) {
     return;
   }
-  // Strip illegal characters.
-  $email_name = trim(preg_replace('/[^\x{80}-\x{F7} a-zA-Z0-9@_.\'-]/', '', str_replace('@', '_at_', $entity->getEmail())));
-  // If there's nothing left use a default.
-  if (empty($email_name)) {
-    $email_name = $name;
-  }
-  // Truncate to a reasonable size.
-  if (mb_strlen($email_name) > (UserInterface::USERNAME_MAX_LENGTH - 10)) {
-    $email_name = mb_substr($email_name, 0, UserInterface::USERNAME_MAX_LENGTH - 11);
-  }
-  $i = 0;
-  $user = FALSE;
-  do {
-    $new_name = !$i ? $email_name : $email_name . '_' . $i;
-    $user = user_load_by_name($new_name);
-    $i++;
-  } while ($user);
-  $entity->setUsername($new_name);
+  $entity->setUsername(\Drupal::service('vbase.generator')->userNameFromMail($entity->getEmail()));
 }
 
 /**
@@ -361,14 +344,14 @@ function vbase_antispam_form_validate(&$form, FormStateInterface $form_state) {
  * @see https://www.drupal.org/node/2492171
  */
 function vbase_file_validate(FileInterface $file) {
-  $errors = array();
+  $errors = [];
   $filename = $file->getFilename();
   // Transliterate and sanitize the destination filename.
   $filename_fixed = \Drupal::transliteration()->transliterate($filename, 'en', '');
   // Replace whitespace.
   $filename_fixed = str_replace(' ', '_', $filename_fixed);
   // Remove remaining unsafe characters.
-  $filename_fixed = preg_replace('![^0-9A-Za-z_.-]!', '', $filename_fixed);
+  $filename_fixed = preg_replace('/[^0-9A-Za-z_.-]/', '', $filename_fixed);
   // Remove multiple consecutive non-alphabetical characters.
   $filename_fixed = preg_replace('/(_)_+|(\.)\.+|(-)-+/', '\\1\\2\\3', $filename_fixed);
   // Force lowercase to prevent issues on case-insensitive file systems.

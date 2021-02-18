@@ -5,3 +5,6 @@ services:
   vbase.antispam:
     class: Drupal\vbase\reCAPTCHA
     arguments: ['@config.factory', '@cache.default']
+  vbase.generator:
+    class: Drupal\vbase\Generator
+    arguments: ['@entity_type.manager', '@transliteration']
