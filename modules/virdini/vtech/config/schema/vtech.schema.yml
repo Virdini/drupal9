@@ -1,6 +1,6 @@
 vtech.settings.developers:
   type: config_object
-  label: 'Developers Settings'
+  label: 'Developers'
   mapping:
     nofollow:
       type: boolean
