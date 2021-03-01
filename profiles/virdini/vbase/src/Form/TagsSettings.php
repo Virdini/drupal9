@@ -25,8 +25,9 @@ class TagsSettings extends ConfigTypedFormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $config = $this->config(self::CONFIG_NAME);
-    $definition = $this->typedConfigManager->getDefinition(self::CONFIG_NAME);
+    $config = $this->config($this->configName);
+    $definition = $this->definition($this->configName);
+
     $form['base'] = [
       '#type' => 'textfield',
       '#title' => $this->t($definition['mapping']['base']['label']),
