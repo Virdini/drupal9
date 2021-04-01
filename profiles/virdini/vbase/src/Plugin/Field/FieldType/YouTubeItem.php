@@ -56,7 +56,7 @@ class YouTubeItem extends FieldItemBase {
    */
   public static function propertyDefinitions(FieldStorageDefinitionInterface $field_definition) {
     $properties['value'] = DataDefinition::create('string')
-      ->setLabel(t('YouTube Video Id'))
+      ->setLabel(t('YouTube ID'))
       ->setRequired(TRUE);
     $properties['resp'] = DataDefinition::create('boolean')
       ->setLabel(t('Responsive'));
