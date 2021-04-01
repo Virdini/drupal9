@@ -61,10 +61,10 @@ class GeoCoordinatesItem extends FieldItemBase {
    * {@inheritdoc}
    */
   public static function propertyDefinitions(FieldStorageDefinitionInterface $field_definition) {
-    $properties['latitude'] = DataDefinition::create('integer')
+    $properties['latitude'] = DataDefinition::create('float')
       ->setLabel(t('Latitude'))
       ->setRequired(TRUE);
-    $properties['longitude'] = DataDefinition::create('integer')
+    $properties['longitude'] = DataDefinition::create('float')
       ->setLabel(t('Longitude'))
       ->setRequired(TRUE);
     $properties['label'] = DataDefinition::create('string')
