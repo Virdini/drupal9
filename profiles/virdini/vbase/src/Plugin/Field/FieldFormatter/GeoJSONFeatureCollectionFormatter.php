@@ -45,6 +45,9 @@ class GeoJSONFeatureCollectionFormatter extends FormatterBase {
         ],
       ];
     }
+    if (empty($data['features'])) {
+      return [];
+    }
     return [
       '#is_multiple' => FALSE,
       '#attributes' => ['id' => $key . '-map', 'class' => ['gj-field-map']],
