@@ -24,7 +24,7 @@ class GeoCoordinatesWidget extends WidgetBase {
    */
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
     $properties = $items->getItemDefinition()->getPropertyDefinitions();
-    $element['#type'] = 'fieldset';
+    $element['#type'] = $element['#title_display'] == 'invisible' ? 'container' : 'fieldset';
     $element['#attributes']['class'][] = 'vbase-field-widget-grid';
     $element['latitude'] = [
       '#type' => 'textfield',
