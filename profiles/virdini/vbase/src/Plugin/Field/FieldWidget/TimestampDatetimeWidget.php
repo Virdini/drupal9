@@ -1,10 +1,9 @@
 <?php
 
 namespace Drupal\vbase\Plugin\Field\FieldWidget;
+
 use Drupal\Core\Datetime\Plugin\Field\FieldWidget\TimestampDatetimeWidget as CoreTimestampDatetimeWidget;
 use Drupal\Core\Datetime\DrupalDateTime;
-use Drupal\Core\Datetime\Element\Datetime;
-use Drupal\Core\Datetime\Entity\DateFormat;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Form\FormStateInterface;
 
@@ -15,8 +14,7 @@ use Drupal\Core\Form\FormStateInterface;
  *   id = "vbase_datetime_timestamp",
  *   label = @Translation("vbase Datetime Timestamp"),
  *   field_types = {
- *     "timestamp",
- *     "created",
+ *     "timestamp"
  *   }
  * )
  */
@@ -26,8 +24,11 @@ class TimestampDatetimeWidget extends CoreTimestampDatetimeWidget {
    * {@inheritdoc}
    */
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
-    $element = parent::formElement($items, $delta, $element, $form, $form_state);
-    unset($element['value']['#description']);
+    $default_value = isset($items[$delta]->value) && $items[$delta]->value ? DrupalDateTime::createFromTimestamp($items[$delta]->value) : '';
+    $element['value'] = $element + [
+      '#type' => 'datetime',
+      '#default_value' => $default_value,
+    ];
     return $element;
   }
 
