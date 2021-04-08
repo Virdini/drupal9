@@ -1,0 +1,21 @@
+google.recaptcha:
+  js:
+    https://www.google.com/recaptcha/api.js: { type: external, minified: true, weight: -200, attributes: { defer: true, async: true } }
+
+form:
+  js:
+    js/form.js: {}
+  dependencies:
+    - vspam/google.recaptcha
+    - core/jquery
+
+badge:
+  css:
+    component:
+      css/badge.css: {}
+
+settings:
+  css:
+    component:
+      css/settings.css: {}
+      

@@ -2,9 +2,6 @@ services:
   vbase.manifest:
     class: Drupal\vbase\Manifest
     arguments: ['@config.factory', '@cache.default', '@file_system']
-  vbase.antispam:
-    class: Drupal\vbase\reCAPTCHA
-    arguments: ['@config.factory', '@cache.default']
   vbase.generator:
     class: Drupal\vbase\Generator
     arguments: ['@entity_type.manager', '@transliteration']

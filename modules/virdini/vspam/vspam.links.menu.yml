@@ -1,0 +1,5 @@
+vspam.settings:
+  title: 'Spam protection'
+  parent: user.admin_index
+  description: 'Configure site spam protection settings'
+  route_name: vspam.settings

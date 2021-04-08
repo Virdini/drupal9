@@ -17,12 +17,6 @@ vbase.content_protection:
   description: ''
   route_name: vbase.content_protection
 
-vbase.settings.antispam:
-  title: 'Anti Spam'
-  parent: vbase.site_settings
-  description: ''
-  route_name: vbase.settings.antispam
-
 vbase.settings.browsers:
   title: 'Browsers Support'
   parent: vbase.site_settings

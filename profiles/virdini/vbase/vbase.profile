@@ -257,32 +257,6 @@ function vbase_form_alter(&$form, FormStateInterface $form_state, $form_id) {
       $form['pass']['#description'] = t('Enter the password that accompanies your email address.');
     }
   }
-  // Antispam
-  $config = \Drupal::config('vbase.settings.antispam');
-  vbase_add_cacheable_dependency($form, $config);
-  if ($config->get('site_key') && $config->get('secret_key')
-       && in_array($form_id, $config->get('forms') ?: [])) {
-    $form['vbase_antispam'] = [
-      '#type' => 'hidden',
-      '#default_value' => '',
-    ];
-    $attributes = [
-      'class' => ['g-recaptcha'],
-      'data-size' => 'invisible',
-      'data-sitekey' => $config->get('site_key'),
-      'data-callback' => 'vBaseAntiSpamSubmit',
-    ];
-    $form['vbase_antispam_widget'] = [
-      '#markup' => '<div' . new Attribute($attributes) . '></div>',
-    ];
-    $form['#attached']['library'][] = 'vbase/antispam';
-    if ($form_id == 'user_login_form') {
-      $form['vbase_antispam']['#element_validate'] = ['vbase_antispam_element_validate'];
-    }
-    else {
-      $form['#validate'][] = 'vbase_antispam_form_validate';
-    }
-  }
 }
 
 /**
@@ -317,20 +291,6 @@ function vbase_user_login_by_email(&$element, FormStateInterface $form_state, &$
       $query = isset($user_input['name']) ? ['name' => $user_input['name']] : [];
       $form_state->setError($element, t('Unrecognized email address or password. <a href=":password">Forgot your password?</a>', [':password' => Url::fromRoute('user.pass', [], ['query' => $query])->toString()]));
     }
-  }
-}
-
-function vbase_antispam_element_validate(&$element, FormStateInterface $form_state, &$form) {
-  if (!\Drupal::service('vbase.antispam')->verify($form_state->getValue('vbase_antispam'),  \Drupal::request()->getClientIp())) {
-    $form_state->setError($element, t('You did not pass the spam test ;('));
-    $form['#validate'] = [];
-  }
-}
-
-function vbase_antispam_form_validate(&$form, FormStateInterface $form_state) {
-  if (!\Drupal::service('vbase.antispam')->verify($form_state->getValue('vbase_antispam'),  \Drupal::request()->getClientIp())) {
-    $form_state->clearErrors();
-    $form_state->setError($form['vbase_antispam'], t('You did not pass the spam test ;('));
   }
 }
 
