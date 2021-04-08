@@ -10,16 +10,47 @@
   display: none;
 }
 .image-widget.with-preview .image-widget-data {
-  grid-column-start: 1;
-  grid-column-end: 3;
+  grid-column: 1/-1;
+  font-size: 12px;
+}
+.image-widget.with-preview .image-widget-data .button {
+  float: left;
+  margin-right: 10px;
+  min-width: 100px;
 }
 .image-widget .file--image {
-  display: inline-block;
-  width: 110px;
+  max-width: 110px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+.image-widget .file--image span {
+  display: inline-block;
+  vertical-align: middle;
+}
 .image-widget .file-size {
   display: none;
+}
+@media screen and (min-width: 640px) {
+  .image-widget.with-preview {
+    grid-template-columns: 100px 300px;
+  }
+}
+@media screen and (min-width: 960px) {
+  .image-widget.with-preview {
+    grid-template-columns: 100px 300px 300px;
+  }
+  .image-widget.with-preview > div:not(.image-widget-data) {
+    grid-column: 2/-1;
+  }
+  .image-widget.with-preview > div:not(.image-widget-data) > div {
+    width: 50%;
+    float: left;
+    box-sizing: border-box;
+    padding-left: 10px;
+  }
+  .image-widget.with-preview > div:not(.image-widget-data) > div:first-child {
+    padding-left: 0;
+    padding-right: 10px;
+  }
 }
