@@ -17,6 +17,7 @@ use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Render\Element\Email;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 
 /**
  * Implements hook_form_FORM_ID_alter() for install_configure_form().
@@ -237,26 +238,64 @@ function vbase_mail_alter(&$message) {
  * Implements hook_form_alter().
  */
 function vbase_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  if ($form_id == 'user_register_form') {
-    $config = \Drupal::config('vbase.settings.users');
-    vbase_add_cacheable_dependency($form, $config);
-    if ($config->get('register_by_email')) {
-      $form['account']['name']['#type'] = 'value';
-      $form['account']['name']['#value'] = \Drupal::service('vbase.generator')->userName('vbase_');
-    }
+  switch ($form_id) {
+    case 'user_pass_reset':
+      $form['actions']['submit']['#button_type'] = 'primary';
+      if (isset($form['message']['#markup']) && $form['message']['#markup'] instanceof TranslatableMarkup) {
+        $arguments = $form['message']['#markup']->getArguments();
+        if (isset($arguments['%user_name']) && ($user = user_load_by_name($arguments['%user_name']))) {
+          $arguments['%user_name'] = $user->getDisplayName();
+          $form['message']['#markup'] = t($form['message']['#markup']->getUntranslatedString(), $arguments);
+        }
+      }
+      break;
+
+    case 'user_pass':
+      $form['#submit'][] = 'vbase_user_forms_redirect';
+      $form['actions']['submit']['#button_type'] = 'primary';
+      $config = \Drupal::config('vbase.settings.users');
+      vbase_add_cacheable_dependency($form, $config);
+      if ($config->get('login_by_email')) {
+        $form['name']['#title'] = t('Email address');
+      }
+      break;
+
+    case 'user_login_form':
+      $form['actions']['submit']['#button_type'] = 'primary';
+      $config = \Drupal::config('vbase.settings.users');
+      vbase_add_cacheable_dependency($form, $config);
+      if ($config->get('login_by_email')) {
+        $form['name']['#title'] = t('Email address');
+        $form['name']['#type'] = 'email';
+        $form['name']['#maxlength'] = Email::EMAIL_MAX_LENGTH;
+        $form['name']['#element_validate'][] = 'vbase_user_login_by_email';
+        $form['name']['#description'] = t('Enter your email address.');
+        $form['pass']['#description'] = t('Enter the password that accompanies your email address.');
+      }
+      break;
+
+    case 'user_register_form':
+      if (!isset($form['administer_users']['#value']) || !$form['administer_users']['#value']) {
+        $form['#submit'][] = 'vbase_user_forms_redirect';
+        if (isset($form['actions']['submit']['#submit'])) {
+          $form['actions']['submit']['#submit'][] = 'vbase_user_forms_redirect';
+        }
+      }
+      $config = \Drupal::config('vbase.settings.users');
+      vbase_add_cacheable_dependency($form, $config);
+      if ($config->get('register_by_email')) {
+        $form['account']['name']['#type'] = 'value';
+        $form['account']['name']['#value'] = \Drupal::service('vbase.generator')->userName('vbase_');
+      }
+      break;
   }
-  elseif ($form_id == 'user_login_form') {
-    $config = \Drupal::config('vbase.settings.users');
-    vbase_add_cacheable_dependency($form, $config);
-    if ($config->get('login_by_email')) {
-      $form['name']['#title'] = t('Email address');
-      $form['name']['#type'] = 'email';
-      $form['name']['#maxlength'] = Email::EMAIL_MAX_LENGTH;
-      $form['name']['#element_validate'][] = 'vbase_user_login_by_email';
-      $form['name']['#description'] = t('Enter your email address.');
-      $form['pass']['#description'] = t('Enter the password that accompanies your email address.');
-    }
-  }
+}
+
+/**
+ * Redirect users to user-home.
+ */
+function vbase_user_forms_redirect(&$form, FormStateInterface $form_state) {
+  $form_state->setRedirect('user.page');
 }
 
 /**
