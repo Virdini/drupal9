@@ -30,26 +30,30 @@ function vspam_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   vbase_add_cacheable_dependency($form, $config);
   $forms = $config->get('forms') ?: [];
   if ($config->get('site_key') && $config->get('secret_key') && $config->get('forms.' . $form_id)) {
-    $form['#attached']['library'][] = 'vspam/form';
-    if ($config->get('hide_badge')) {
-      $form['#attached']['library'][] = 'vspam/badge';
-    }
-    $form['#attributes']['class'][] = 'vspam-protect';
-    $form['#attributes']['data-vspam-key'] = $config->get('site_key');
-    $form['#attributes']['data-vspam-action'] = $config->get('forms.' . $form_id . '.action') ?: $form_id;
-    $form['vspam_token'] = [
-      '#type' => 'hidden',
-      '#element_validate' => ['vspam_token_validate'],
-      '#weight' => -1000,
-      '#attributes' => ['autocomplete' => 'off'],
-    ];
-    if ($config->get('add_text')) {
-      $form['vspam_branding_text'] = [
-        '#type' => 'container',
-        '#weight' => 1000,
-        '#attributes' => ['class' => ['vspam-branding-text']],
-        '#markup' => t(SpamProtectionInterface::GOOGLE_RECAPTCHA_BRANDING),
+    // Skip Admin-create register form
+    if (!($form_id == 'user_register_form' && isset($form['administer_users']['#value']) && $form['administer_users']['#value'])) {
+      vbase_kint($form);
+      $form['#attached']['library'][] = 'vspam/form';
+      if ($config->get('hide_badge')) {
+        $form['#attached']['library'][] = 'vspam/badge';
+      }
+      $form['#attributes']['class'][] = 'vspam-protect';
+      $form['#attributes']['data-vspam-key'] = $config->get('site_key');
+      $form['#attributes']['data-vspam-action'] = $config->get('forms.' . $form_id . '.action') ?: $form_id;
+      $form['vspam_token'] = [
+        '#type' => 'hidden',
+        '#element_validate' => ['vspam_token_validate'],
+        '#weight' => -1000,
+        '#attributes' => ['autocomplete' => 'off'],
       ];
+      if ($config->get('add_text')) {
+        $form['vspam_branding_text'] = [
+          '#type' => 'container',
+          '#weight' => 1000,
+          '#attributes' => ['class' => ['vspam-branding-text']],
+          '#markup' => t(SpamProtectionInterface::GOOGLE_RECAPTCHA_BRANDING),
+        ];
+      }
     }
   }
 }
