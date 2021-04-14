@@ -23,5 +23,8 @@ vbase antispam settings:
 vbase delayed publishing all:
   title: 'Access to all delayed publishing fields'
 
+vbase term all create:
+  title: 'Create all taxonomy terms'
+
 permission_callbacks:
   - Drupal\vbase\NodePermissions::nodeTypePermissions

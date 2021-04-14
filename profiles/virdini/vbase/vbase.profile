@@ -40,6 +40,13 @@ function vbase_google_tag_snippets_alter(&$snippets) {
 }
 
 /**
+ * Implements hook_ENTITY_TYPE_create_access().
+ */
+function vbase_taxonomy_term_create_access(AccountInterface $account, array $context, $entity_bundle) {
+  return AccessResult::allowedIfHasPermission($account, 'vbase term all create');
+}
+
+/**
  * Implements hook_entity_access().
  */
 function vbase_entity_access(EntityInterface $entity, $operation, AccountInterface $account) {
