@@ -54,7 +54,7 @@ function vbase_tokens($type, array $tokens, array $data = array(), array $option
   else {
     $langcode = LanguageInterface::LANGCODE_DEFAULT;
   }
-  $replacements = array();
+  $replacements = [];
   if ($type == 'node' && !empty($data['node'])) {
     $node = $data['node'];
     foreach ($tokens as $name => $original) {
@@ -119,17 +119,14 @@ function vbase_tokens_alter(array &$replacements, array $context, BubbleableMeta
       $replacements[$context['tokens']['title']] = $view->getTitle();
     }
     else {
-      $matches = array();
-      preg_match('/entity\.(.*)\.(.*)/', $route_name, $matches);
-      if(!$replacements[$context['tokens']['title']] && !empty($matches[1]) && $matches[1] == 'node' && !empty($matches[2])) {
+      $matches = [];
+      if(!$replacements[$context['tokens']['title']] && preg_match('/entity\.(.*)\.(.*)/', $route_name, $matches)) {
         switch ($matches[2]) {
           case 'edit_form':
-            $node = $route->getParameter('node');
-            $replacements[$context['tokens']['title']] = t('<em>Edit @type</em> @title', array('@type' => node_get_type_label($node), '@title' => $node->label()));
+            $replacements[$context['tokens']['title']] = t('Edit');
             break;
           case 'content_translation_overview':
-            $node = $route->getParameter('node');
-            $replacements[$context['tokens']['title']] = t('Translations of %label', array('%label' => $node->label()));
+            $replacements[$context['tokens']['title']] = t('Translations');
             break;
         }
       }
