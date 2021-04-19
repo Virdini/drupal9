@@ -18,7 +18,7 @@ vbase.content_protection:
   path: '/admin/config/system/site-settings/content-protection'
   defaults:
     _form: 'Drupal\vbase\Form\ContentProtectionSettings'
-    _title: 'Content Protection'
+    _title: 'Content protection'
   requirements:
     _permission: 'vbase content protection settings'
 

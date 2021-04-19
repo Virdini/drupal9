@@ -50,25 +50,34 @@ function vbase_taxonomy_term_create_access(AccountInterface $account, array $con
  * Implements hook_entity_access().
  */
 function vbase_entity_access(EntityInterface $entity, $operation, AccountInterface $account) {
+  $access = AccessResult::neutral();
   switch ($operation) {
     case 'view':
       if (in_array($entity->getEntityTypeId(), ['node', 'taxonomy_term'])) {
         $config = \Drupal::config('vbase.settings.cp');
         $bundles = $config->get($entity->getEntityTypeId() == 'node' ? 'node_bundles' : 'taxonomy_vocabularies');
-        return AccessResult::forbiddenIf(!empty($bundles) && in_array($entity->bundle(), $bundles)
-                                         && !$account->hasPermission('vbase view protected content'))
-                ->addCacheableDependency($config)
-                ->cachePerPermissions();
+        if (!empty($bundles) && in_array($entity->bundle(), $bundles)) {
+          if (!$account->hasPermission('vbase view protected content')) {
+            $route_match = \Drupal::routeMatch();
+            if (preg_match('/entity\.' . $entity->getEntityTypeId() . '\.canonical$/', $route_match->getRouteName(), $matches)) {
+              $route_entity = $route_match->getParameter($entity->getEntityTypeId());
+              $access = AccessResult::forbiddenIf($route_entity->id() == $entity->id());
+            }
+            $access->addCacheContexts(['route']);
+          }
+          $access->cachePerPermissions();
+        }
+        $access->addCacheableDependency($config);
       }
       break;
+
     case 'update':
       if ($entity->getEntityTypeId() == 'user') {
-        return AccessResult::forbiddenIf($entity->id() == 1 && $account->id() != 1)
-                ->cachePerPermissions();
+        $access = AccessResult::forbiddenIf($entity->id() == 1 && $account->id() != 1)->cachePerUser();
       }
       break;
   }
-  return AccessResult::neutral();
+  return $access;
 }
 
 /**

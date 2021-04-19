@@ -12,9 +12,9 @@ vbase.tags_settings:
   route_name: vbase.tags_settings
 
 vbase.content_protection:
-  title: 'Content Protection'
+  title: 'Content protection'
   parent: vbase.site_settings
-  description: ''
+  description: 'Protect entity canonical pages'
   route_name: vbase.content_protection
 
 vbase.settings.browsers:
