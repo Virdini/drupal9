@@ -4,7 +4,7 @@ description: 'Provides test support for entity serialization tests.'
 package: Testing
 # version: VERSION
 
-# Information added by Drupal.org packaging script on 2021-04-21
-version: '9.1.7'
+# Information added by Drupal.org packaging script on 2021-05-05
+version: '9.1.8'
 project: 'drupal'
-datestamp: 1619022211
+datestamp: 1620214265
