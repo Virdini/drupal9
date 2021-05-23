@@ -107,6 +107,19 @@ function vbase_node_load($entities) {
 }
 
 /**
+ * Get a current user entity.
+ *
+ * @return \Drupal\user\UserInterface|bool
+ *   A current user entity or FALSE if user is anonymous.
+ */
+function vbase_current_user() {
+  if ($uid = \Drupal::currentUser()->id()) {
+    return \Drupal::entityTypeManager()->getStorage('user')->load($uid);
+  }
+  return FALSE;
+}
+
+/**
  * Implements hook_cron().
  */
 function vbase_cron() {
