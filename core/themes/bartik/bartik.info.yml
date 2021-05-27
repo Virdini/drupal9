@@ -72,7 +72,7 @@ regions:
   footer_fourth: 'Footer fourth'
   footer_fifth: 'Footer fifth'
 
-# Information added by Drupal.org packaging script on 2021-05-05
-version: '9.1.8'
+# Information added by Drupal.org packaging script on 2021-05-26
+version: '9.1.9'
 project: 'drupal'
-datestamp: 1620214265
+datestamp: 1622056532
