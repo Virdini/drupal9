@@ -53,10 +53,9 @@ libraries-override:
       component:
         /core/themes/stable/css/core/vertical-tabs.css: public://my_css/vertical-tabs.css
   # Use a protocol-relative URI.
-  core/jquery.ui:
-    css:
-      component:
-        assets/vendor/jquery.ui/themes/base/core.css: //my-server/my_theme/css/jquery_ui.css
+  core/drupal.displace:
+    js:
+      misc/displace.js: //my-server/my_theme/js/overridden.js
   # Use an absolute URI.
   core/jquery.farbtastic:
     css:
@@ -68,7 +67,7 @@ regions:
   left: Left
   right: Right
 
-# Information added by Drupal.org packaging script on 2021-06-04
-version: '9.1.10'
+# Information added by Drupal.org packaging script on 2021-06-16
+version: '9.2.0'
 project: 'drupal'
-datestamp: 1622828172
+datestamp: 1623847878
