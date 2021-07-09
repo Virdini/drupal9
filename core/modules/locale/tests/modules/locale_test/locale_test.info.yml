@@ -7,7 +7,7 @@ hidden: true
 'interface translation project': locale_test
 'interface translation server pattern': core/modules/locale/test/test.%language.po
 
-# Information added by Drupal.org packaging script on 2021-06-16
-version: '9.2.0'
+# Information added by Drupal.org packaging script on 2021-07-07
+version: '9.2.1'
 project: 'drupal'
-datestamp: 1623847878
+datestamp: 1625664353
