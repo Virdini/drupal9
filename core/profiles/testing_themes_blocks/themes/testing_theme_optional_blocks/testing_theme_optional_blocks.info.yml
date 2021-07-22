@@ -14,7 +14,7 @@ regions:
   page_bottom: 'Page bottom'
   sidebar_first: 'First sidebar'
 
-# Information added by Drupal.org packaging script on 2021-07-07
-version: '9.2.1'
+# Information added by Drupal.org packaging script on 2021-07-21
+version: '9.2.2'
 project: 'drupal'
-datestamp: 1625664353
+datestamp: 1626882440
