@@ -127,25 +127,30 @@ class ConfigBatchExport extends FormBase {
       $context['sandbox']['progress'] = 0;
       $context['sandbox']['max'] = count($items);
     }
-    $index = $context['sandbox']['progress'];
-    $name = $items[$index]['name'];
-    $context['message'] = $name;
     $archiver = new ArchiveTar($this->fileSystem->getTempDirectory() . '/config.tar.gz', 'gz');
-    // Get raw configuration data without overrides.
-    if (!isset($items[$index]['collection'])) {
-      $archiver->addString("$name.yml", Yaml::encode($this->exportStorage->read($name)));
-    }
-    // Get all override data from the remaining collections.
-    else {
-      $collection = $items[$index]['collection'];
-      $collection_storage = $this->exportStorage->createCollection($collection);
-      $archiver->addString(str_replace('.', '/', $collection) . "/$name.yml", Yaml::encode($collection_storage->read($name)));
-    }
-    $context['sandbox']['progress']++;
+    for ($i = 0; $i < 30; $i++) {
+      $index = $context['sandbox']['progress'];
+      if (!isset($items[$index])) {
+        break;
+      }
+      $name = $items[$index]['name'];
+      $context['message'] = $name;
+      // Get raw configuration data without overrides.
+      if (!isset($items[$index]['collection'])) {
+        $archiver->addString("$name.yml", Yaml::encode($this->exportStorage->read($name)));
+      }
+      // Get all override data from the remaining collections.
+      else {
+        $collection = $items[$index]['collection'];
+        $collection_storage = $this->exportStorage->createCollection($collection);
+        $archiver->addString(str_replace('.', '/', $collection) . "/$name.yml", Yaml::encode($collection_storage->read($name)));
+      }
+      $context['sandbox']['progress']++;
 
-    // If not finished all tasks, we count percentage of process. 1 = 100%.
-    if ($context['sandbox']['progress'] != $context['sandbox']['max']) {
-      $context['finished'] = $context['sandbox']['progress'] / $context['sandbox']['max'];
+      // If not finished all tasks, we count percentage of process. 1 = 100%.
+      if ($context['sandbox']['progress'] != $context['sandbox']['max']) {
+        $context['finished'] = $context['sandbox']['progress'] / $context['sandbox']['max'];
+      }
     }
   }
 
