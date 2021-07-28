@@ -111,3 +111,11 @@ function vmcore_form_node_form_alter(&$form) {
   $form['meta']['changed']['#wrapper_attributes']['class'][] = 'container-inline';
   $form['meta']['author']['#wrapper_attributes']['class'][] = 'container-inline';
 }
+
+/**
+ * Implements hook_preprocess_HOOK() for hook: 'input__submit'.
+ */
+function vmcore_preprocess_input__submit(&$variables) {
+  $variables['attributes']['class'][] = 'notranslate';
+  $variables['attributes']['translate'] = 'no';
+}
