@@ -4,7 +4,7 @@ base theme: stable
 description: 'Theme for testing BigPipe edge cases.'
 # version: VERSION
 
-# Information added by Drupal.org packaging script on 2021-08-03
-version: '9.2.3'
+# Information added by Drupal.org packaging script on 2021-08-12
+version: '9.2.4'
 project: 'drupal'
-datestamp: 1627997989
+datestamp: 1628791240
