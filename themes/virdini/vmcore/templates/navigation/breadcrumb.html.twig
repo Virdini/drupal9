@@ -3,6 +3,7 @@
 {{ attach_library('vmcore/breadcrumb') }}
   {% if breadcrumb|length > 1 %}
       <ol itemtype="http://schema.org/BreadcrumbList" itemscope{{ attributes.addClass('crumb')|without('itemtype', 'itemscope') }}>
+      {{ breadcrumb_meta }}
       {% for key, item in breadcrumb %}
         <li itemprop="itemListElement" itemtype="http://schema.org/ListItem" itemscope>
         {% if item.url %}
