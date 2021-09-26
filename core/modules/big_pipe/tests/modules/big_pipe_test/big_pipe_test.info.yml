@@ -4,7 +4,7 @@ description: 'Support module for BigPipe testing.'
 package: Testing
 # version: VERSION
 
-# Information added by Drupal.org packaging script on 2021-09-01
-version: '9.2.5'
+# Information added by Drupal.org packaging script on 2021-09-15
+version: '9.2.6'
 project: 'drupal'
-datestamp: 1630534789
+datestamp: 1631721621
