@@ -11,7 +11,7 @@ dependencies:
   # @todo Discuss removing in https://www.drupal.org/project/drupal/issues/3003610.
   - drupal:block
 
-# Information added by Drupal.org packaging script on 2021-12-09
-version: '9.3.0'
+# Information added by Drupal.org packaging script on 2022-01-05
+version: '9.3.2'
 project: 'drupal'
-datestamp: 1639051328
+datestamp: 1641351885
