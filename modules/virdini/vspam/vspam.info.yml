@@ -8,4 +8,4 @@ configure: vspam.settings
 'interface translation project': vspam
 'interface translation server pattern': https://s1.virdini.com/projects/virdini/translations/vspam.%language.po
 
-version: '1.0.0'
+version: '1.0.1'

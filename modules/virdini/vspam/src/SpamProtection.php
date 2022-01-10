@@ -63,6 +63,25 @@ class SpamProtection implements SpamProtectionInterface {
    *  If user passes CAPTCHA test.
    */
   public function verify(string $response, string $form_id) {
+    $action = $this->settings->get('forms.' . $form_id . '.action') ?: $form_id;
+    $score = $this->settings->get('forms.' . $form_id . '.score') ?: 0.5;
+    return $this->verifyResponse($response, $action, $score);
+  }
+
+  /**
+   * Calls the reCAPTCHA siteverify API to verify whether the user passes CAPTCHA test.
+   *
+   * @param string $response
+   *  The value of 'g-recaptcha-response' in the submitted form.
+   * @param string $action
+   *  The reCAPTCHA action.
+   * @param float $score
+   *  The reCAPTCHA score.
+   *
+   * @return bool
+   *  If user passes CAPTCHA test.
+   */
+  public function verifyResponse(string $response, string $action, float $score = 0.5) {
     if (!$response) {
       return FALSE;
     }
@@ -74,8 +93,6 @@ class SpamProtection implements SpamProtectionInterface {
     $this->cacheBackend->set($cid, [], time() + 86400);
     // Send request to Google.
     $result = $this->request(['response' => $response]);
-    $action = $this->settings->get('forms.' . $form_id . '.action') ?: $form_id;
-    $score = $this->settings->get('forms.' . $form_id . '.score') ?: 0.5;
     return isset($result['success']) && $result['success'] == TRUE
             && $result['action'] == $action && $result['score'] >= $score;
   }
