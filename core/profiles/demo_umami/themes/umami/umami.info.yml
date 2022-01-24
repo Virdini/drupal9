@@ -68,7 +68,7 @@ regions:
 ckeditor_stylesheets:
   - css/classy/components/media-embed-error.css
 
-# Information added by Drupal.org packaging script on 2022-01-05
-version: '9.3.2'
+# Information added by Drupal.org packaging script on 2022-01-19
+version: '9.3.3'
 project: 'drupal'
-datestamp: 1641351885
+datestamp: 1642607853
