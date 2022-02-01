@@ -6,7 +6,7 @@ use Drupal\vbase\Form\ConfigTypedFormBase;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Configure site developers information for this site.
+ * Configure the display of the developer badge.
  */
 class DevelopersSettings extends ConfigTypedFormBase {
 

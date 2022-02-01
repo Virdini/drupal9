@@ -1,9 +1,9 @@
-(function () {
+(function (d) {
 
   'use strict';
 
-  var select = document.getElementById('edit-logo'),
-      img = document.getElementById('developers-settings-logo'),
+  var select = d.getElementById('edit-logo'),
+      img = d.getElementById('developers-settings-logo'),
       url = img.src.substring(0, img.src.lastIndexOf('/') + 1);
 
   show_logo(select);
@@ -16,4 +16,4 @@
     img.src = url + el.value;
   }
 
-})();
+})(document);

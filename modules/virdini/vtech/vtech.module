@@ -31,39 +31,45 @@ function vtech_preprocess_page(array &$variables) {
  * Implements template_preprocess_HOOK().
  */
 function template_preprocess_developers(array &$variables) {
-  $variables['attributes']['href'] = 'https://virdini.com';
   $config = \Drupal::config('vtech.settings.developers');
   vbase_add_cacheable_dependency($variables, $config);
-  if (!($variables['logo'] = $config->get('logo'))) {
-    $variables['logo'] = 'logo.svg';
-  }
+
+  // Developer badge logo settings.
+  $variables['logo'] = $config->get('logo');
   $variables['width'] = $config->get('width');
-  if ($variables['width'] < 70) {
-    $variables['width'] = 70;
-  }
+
+  // Developer badge label display setting.
   $variables['label_display'] = $config->get('label');
-  $key = (int)$config->get('developed') .'-'. (int)$config->get('maintained');
+
+  // Developer badge label and title.
+  $key = (int)$config->get('developed') . '-' . (int)$config->get('maintained');
   switch ($key) {
     case '1-0':
       $variables['title'] = t('Website was developed by Virdini');
       $variables['label'] = t('Developed');
       break;
+
     case '0-1':
       $variables['title'] = t('Website maintained by Virdini');
       $variables['label'] = t('Maintained');
       break;
+
     default:
       $variables['title'] = t('Website was developed and maintained by Virdini');
       $variables['label'] = t('Developed and maintained');
       break;
   }
+
+  // Add attributes to link.
+  $variables['attributes']['target'] = '_blank';
   if ($config->get('nofollow')) {
     $variables['attributes']['rel'] = 'nofollow';
   }
-  if (!isset($variables['attributes']['title'])) {
-    $variables['attributes']['title'] = $variables['title'];
-  }
-  if (!isset($variables['attributes']['target'])) {
-    $variables['attributes']['target'] = '_blank';
-  }
+
+  // Add title to link.
+  $variables['attributes']['title'] = $variables['title'];
+
+  // Link to the developer's site.
+  $variables['attributes']['href'] = 'https://virdini.com';
+
 }
