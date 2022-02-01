@@ -4,4 +4,4 @@ vtech.settings.developers:
     _form: '\Drupal\vtech\Form\DevelopersSettings'
     _title: 'Developers'
   requirements:
-    _permission: 'vbase site settings'
+    _permission: 'vtech developers'

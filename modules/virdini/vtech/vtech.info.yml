@@ -8,7 +8,7 @@ configure: vtech.developers_settings
 'interface translation server pattern': https://localize.virdini.com/drupal/vtech.%language.po
 
 core_version_requirement: ^9
-version: '9.0.0'
+version: '9.0.1'
 
 dependencies:
   - admin_toolbar:admin_toolbar_tools
