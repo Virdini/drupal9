@@ -1,0 +1,20 @@
+{
+  "name": "virdini/drupal-vspam",
+  "description": "Module provides protection against spam for the project.",
+  "type": "drupal-virdini-module",
+  "license": "GPL-2.0-or-later",
+  "homepage": "https://github.com/Virdini/drupal-vspam",
+  "authors": [
+    {
+      "name": "Virdini",
+      "email": "tech@virdini.com",
+      "homepage": "https://virdini.com",
+      "role": "Developer"
+    }
+  ],
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require": {
+    "drupal/core": "^9"
+  }
+}

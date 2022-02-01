@@ -1,4 +1,5 @@
 (function ($) {
+
   'use strict';
 
   var forms = $('form.vspam-protect'), form,

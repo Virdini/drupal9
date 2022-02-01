@@ -1,3 +1,3 @@
-vspam admin:
-  title: 'Administer spam protection'
-  restrict access: true
+vspam settings:
+  title: 'Settings'
+  description: 'Configure spam protection settings for the site.'

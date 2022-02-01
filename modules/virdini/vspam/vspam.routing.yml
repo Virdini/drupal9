@@ -2,6 +2,6 @@ vspam.settings:
   path: '/admin/config/people/vspam'
   defaults:
     _form: '\Drupal\vspam\Form\SpamProtectionSettings'
-    _title: 'Spam protection'
+    _title: 'Virdini Spam Protection'
   requirements:
-    _permission: 'vspam admin'
+    _permission: 'vspam settings'

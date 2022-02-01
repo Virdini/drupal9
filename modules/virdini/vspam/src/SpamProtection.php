@@ -52,7 +52,7 @@ class SpamProtection implements SpamProtectionInterface {
   }
 
   /**
-   * Calls the reCAPTCHA siteverify API to verify whether the user passes CAPTCHA test.
+   * Calls the reCAPTCHA siteverify API to verify whether the user passes CAPTCHA test for configured forms.
    *
    * @param string $response
    *  The value of 'g-recaptcha-response' in the submitted form.
@@ -85,12 +85,14 @@ class SpamProtection implements SpamProtectionInterface {
     if (!$response) {
       return FALSE;
     }
+
     // Check the reCAPTCHA response in Database.
     $cid = 'vspam:'. hash('sha256', $response);
     if ($this->cacheBackend->get($cid)) {
       return FALSE;
     }
     $this->cacheBackend->set($cid, [], time() + 86400);
+
     // Send request to Google.
     $result = $this->request(['response' => $response]);
     return isset($result['success']) && $result['success'] == TRUE
