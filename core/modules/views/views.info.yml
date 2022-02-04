@@ -6,7 +6,7 @@ package: Core
 dependencies:
   - drupal:filter
 
-# Information added by Drupal.org packaging script on 2022-01-19
-version: '9.3.3'
+# Information added by Drupal.org packaging script on 2022-02-02
+version: '9.3.4'
 project: 'drupal'
-datestamp: 1642607853
+datestamp: 1643832865
