@@ -18,7 +18,7 @@
     "source": "http://cgit.drupalcode.org/ckeditor_youtube"
   },
   "require": {
-    "php": "^7.1",
+    "php": "^7.1 || ^8.0",
     "drupal/core": "^8 || ^9"
   }
 }
