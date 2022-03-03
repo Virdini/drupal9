@@ -11,7 +11,7 @@ install:
   - missing_module2
 keep_english: true
 
-# Information added by Drupal.org packaging script on 2022-02-04
-version: '9.3.5'
+# Information added by Drupal.org packaging script on 2022-02-16
+version: '9.3.6'
 project: 'drupal'
-datestamp: 1644011752
+datestamp: 1645029535
