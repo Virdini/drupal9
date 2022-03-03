@@ -15,7 +15,7 @@ regions_hidden:
   - sidebar_first
   - sidebar_second
 
-# Information added by Drupal.org packaging script on 2022-02-16
-version: '9.3.6'
+# Information added by Drupal.org packaging script on 2022-03-03
+version: '9.3.7'
 project: 'drupal'
-datestamp: 1645029535
+datestamp: 1646300651
