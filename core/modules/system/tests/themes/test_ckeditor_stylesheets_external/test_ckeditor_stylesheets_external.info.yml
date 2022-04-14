@@ -5,8 +5,10 @@ description: 'A theme that uses an external CKEditor stylesheet.'
 base theme: false
 ckeditor_stylesheets:
   - https://fonts.googleapis.com/css?family=Open+Sans
+ckeditor5-stylesheets:
+  - https://fonts.googleapis.com/css?family=Open+Sans
 
-# Information added by Drupal.org packaging script on 2022-03-03
-version: '9.3.7'
+# Information added by Drupal.org packaging script on 2022-04-14
+version: '9.3.11'
 project: 'drupal'
-datestamp: 1646300651
+datestamp: 1649897478

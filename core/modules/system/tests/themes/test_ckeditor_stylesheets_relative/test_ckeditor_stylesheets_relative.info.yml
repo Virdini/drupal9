@@ -5,8 +5,10 @@ description: 'A theme that uses a relative CKEditor stylesheet.'
 base theme: false
 ckeditor_stylesheets:
   - css/yokotsoko.css
+ckeditor5-stylesheets:
+  - css/yokotsoko.css
 
-# Information added by Drupal.org packaging script on 2022-03-03
-version: '9.3.7'
+# Information added by Drupal.org packaging script on 2022-04-14
+version: '9.3.11'
 project: 'drupal'
-datestamp: 1646300651
+datestamp: 1649897478
