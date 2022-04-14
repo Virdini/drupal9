@@ -2,7 +2,7 @@ name: 'JSON:API test resource type building API'
 type: module
 package: Testing
 
-# Information added by Drupal.org packaging script on 2022-03-03
-version: '9.3.7'
+# Information added by Drupal.org packaging script on 2022-04-14
+version: '9.3.11'
 project: 'drupal'
-datestamp: 1646300651
+datestamp: 1649897478
