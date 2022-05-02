@@ -26,7 +26,7 @@ libraries-extend:
 ckeditor_stylesheets:
   - css/components/media-embed-error.css
 
-# Information added by Drupal.org packaging script on 2022-04-14
-version: '9.3.11'
+# Information added by Drupal.org packaging script on 2022-04-20
+version: '9.3.12'
 project: 'drupal'
-datestamp: 1649897478
+datestamp: 1650467597

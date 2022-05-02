@@ -506,11 +506,11 @@
         },
         {
             "name": "drupal/core",
-            "version": "9.3.11",
+            "version": "9.3.12",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drupal/core/zipball/b8978dd6a4639bdc0930a6eb7791afffcd931a1b",
-                "reference": "b8978dd6a4639bdc0930a6eb7791afffcd931a1b",
+                "url": "https://api.github.com/repos/drupal/core/zipball/ed6af33093f66a9c5048d02f9f2c326ad0e7e90c",
+                "reference": "ed6af33093f66a9c5048d02f9f2c326ad0e7e90c",
                 "shasum": ""
             },
             "require": {
@@ -761,12 +761,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal/core.git",
-                "reference": "b8978dd6a4639bdc0930a6eb7791afffcd931a1b"
+                "reference": "ed6af33093f66a9c5048d02f9f2c326ad0e7e90c"
             }
         },
         {
             "name": "drupal/core-composer-scaffold",
-            "version": "9.3.11",
+            "version": "9.3.12",
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/drupal/core-composer-scaffold/zipball/a9dd9def8891e1c388719474720b57d3fe929a2f",
@@ -811,7 +811,7 @@
         },
         {
             "name": "drupal/core-project-message",
-            "version": "9.3.11",
+            "version": "9.3.12",
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/drupal/core-project-message/zipball/69664743736977676e11f824301ea3e925a712fc",
@@ -847,11 +847,11 @@
         },
         {
             "name": "drupal/core-recommended",
-            "version": "9.3.11",
+            "version": "9.3.12",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drupal/core-recommended/zipball/9454fd8bce0172964d132feea87123a70948b6ee",
-                "reference": "9454fd8bce0172964d132feea87123a70948b6ee",
+                "url": "https://api.github.com/repos/drupal/core-recommended/zipball/a8fa50016c1aa1eb7f4e54f590e6343d286c418f",
+                "reference": "a8fa50016c1aa1eb7f4e54f590e6343d286c418f",
                 "shasum": ""
             },
             "require": {
@@ -860,7 +860,7 @@
                 "doctrine/annotations": "1.13.2",
                 "doctrine/lexer": "1.2.1",
                 "doctrine/reflection": "1.2.2",
-                "drupal/core": "9.3.11",
+                "drupal/core": "9.3.12",
                 "egulias/email-validator": "3.1.2",
                 "guzzlehttp/guzzle": "6.5.5",
                 "guzzlehttp/promises": "1.5.1",
@@ -923,12 +923,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal/core-recommended.git",
-                "reference": "9454fd8bce0172964d132feea87123a70948b6ee"
+                "reference": "a8fa50016c1aa1eb7f4e54f590e6343d286c418f"
             }
         },
         {
             "name": "drupal/core-vendor-hardening",
-            "version": "9.3.11",
+            "version": "9.3.12",
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/drupal/core-vendor-hardening/zipball/1c867b32b93200ef00840c5f153ae7750fa3ca7b",
