@@ -732,6 +732,7 @@ lolspeak
 longblob
 longerthan
 longtext
+longwave
 loquesea
 loreming
 loremingipsum
@@ -888,6 +889,7 @@ nmsgstr
 nntp
 noaccess
 noadd
+noblanks
 nocache
 nocase
 nocdata

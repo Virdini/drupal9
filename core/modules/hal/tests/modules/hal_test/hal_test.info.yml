@@ -4,7 +4,7 @@ description: "Support module for HAL tests."
 package: Testing
 # version: VERSION
 
-# Information added by Drupal.org packaging script on 2022-07-20
-version: '9.4.3'
+# Information added by Drupal.org packaging script on 2023-05-03
+version: '9.4.15'
 project: 'drupal'
-datestamp: 1658333496
+datestamp: 1683122155
