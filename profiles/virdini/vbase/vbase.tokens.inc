@@ -47,7 +47,7 @@ function vbase_token_info() {
 /**
  * Implements hook_tokens().
  */
-function vbase_tokens($type, array $tokens, array $data = array(), array $options = array(), BubbleableMetadata $bubbleable_metadata) {
+function vbase_tokens($type, array $tokens, array $data, array $options, BubbleableMetadata $bubbleable_metadata) {
   if (isset($options['langcode'])) {
     $langcode = $options['langcode'];
   }
