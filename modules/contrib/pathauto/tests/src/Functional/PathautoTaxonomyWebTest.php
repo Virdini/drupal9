@@ -16,7 +16,7 @@ class PathautoTaxonomyWebTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected $defaultTheme = 'stable';
+  protected $defaultTheme = 'stark';
 
   /**
    * Modules to enable.
@@ -103,7 +103,7 @@ class PathautoTaxonomyWebTest extends BrowserTestBase {
     $this->drupalGet($automatic_alias);
     $this->assertSession()->statusCodeEquals(404);
     $this->drupalGet($manual_alias);
-    $this->assertSession()->pageTextContains($name, 'Term accessible through manual alias.');
+    $this->assertSession()->pageTextContains($name);
   }
 
 }

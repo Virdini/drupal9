@@ -2,12 +2,11 @@
 
 namespace Drupal\Tests\pathauto\FunctionalJavascript;
 
+use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Core\Url;
 use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
 use Drupal\pathauto\Entity\PathautoPattern;
 use Drupal\Tests\pathauto\Functional\PathautoTestHelperTrait;
-use Drupal\Component\Render\FormattableMarkup;
-
 
 /**
  * Test basic pathauto functionality.
@@ -21,7 +20,7 @@ class PathautoUiTest extends WebDriverTestBase {
   /**
    * {@inheritdoc}
    */
-  protected $defaultTheme = 'stable';
+  protected $defaultTheme = 'stark';
 
   /**
    * Modules to enable.
@@ -96,10 +95,12 @@ class PathautoUiTest extends WebDriverTestBase {
     $this->submitForm($edit, 'Save');
 
     $this->assertSession()->waitForElementVisible('css', '[name="id"]');
-    $edit += [
-      'id' => 'page_pattern',
-    ];
-    $this->submitForm( $edit, 'Save');
+    if (version_compare(\Drupal::VERSION, '10.1', '<')) {
+      $edit += [
+        'id' => 'page_pattern',
+      ];
+      $this->submitForm($edit, 'Save');
+    }
 
     $this->assertSession()->pageTextContains('Path pattern is using the following invalid tokens: [user:name], [term:name].');
     $this->assertSession()->pageTextNotContains('The configuration options have been saved.');
@@ -140,7 +141,8 @@ class PathautoUiTest extends WebDriverTestBase {
     $session->getPage()->find('css', '.dropbutton-toggle > button')->press();
     $this->clickLink('Edit');
     $destination_query = ['query' => ['destination' => Url::fromRoute('entity.pathauto_pattern.collection')->toString()]];
-    $this->assertSession()->addressEquals('/admin/config/search/path/patterns/page_pattern', $destination_query);
+    $address = Url::fromRoute('entity.pathauto_pattern.edit_form', ['pathauto_pattern' => 'page_pattern'], [$destination_query]);
+    $this->assertSession()->addressEquals($address);
     $this->assertSession()->fieldValueEquals('pattern', '[node:title]');
     $this->assertSession()->fieldValueEquals('label', 'Page pattern');
     $this->assertSession()->checkboxChecked('edit-status');
@@ -185,7 +187,8 @@ class PathautoUiTest extends WebDriverTestBase {
     $this->drupalGet('/admin/config/search/path/patterns');
     $this->assertSession()->linkNotExists('Disable');
     $this->clickLink('Enable');
-    $this->assertSession()->addressEquals('/admin/config/search/path/patterns/page_pattern/enable', $destination_query);
+    $address = Url::fromRoute('entity.pathauto_pattern.enable', ['pathauto_pattern' => 'page_pattern'], [$destination_query]);
+    $this->assertSession()->addressEquals($address);
     $this->submitForm([], 'Enable');
     $this->assertSession()->pageTextContains('Enabled pattern Test.');
 
@@ -197,9 +200,17 @@ class PathautoUiTest extends WebDriverTestBase {
     $this->drupalGet('/admin/config/search/path/patterns');
     $session->getPage()->find('css', '.dropbutton-toggle > button')->press();
     $this->clickLink('Delete');
-    $this->assertSession()->addressEquals('/admin/config/search/path/patterns/page_pattern/delete', $destination_query);
-    $this->assertSession()->pageTextContains('This action cannot be undone.');
-    $this->submitForm([], 'Delete');
+    $this->assertSession()->assertWaitOnAjaxRequest();
+    if (version_compare(\Drupal::VERSION, '10.1', '>=')) {
+      $this->assertSession()->pageTextContains('This action cannot be undone.');
+      $this->getSession()->getPage()->find('css', '.ui-dialog-buttonpane')->findButton('Delete')->press();
+      $this->assertSession()->assertWaitOnAjaxRequest();
+    }
+    else {
+      $address = Url::fromRoute('entity.pathauto_pattern.delete_form', ['pathauto_pattern' => 'page_pattern'], [$destination_query]);
+      $this->assertSession()->addressEquals($address);
+      $this->submitForm([], 'Delete');
+    }
     $this->assertSession()->pageTextContains('The pathauto pattern Test has been deleted.');
 
     $this->assertEmpty(PathautoPattern::load('page_pattern'));
