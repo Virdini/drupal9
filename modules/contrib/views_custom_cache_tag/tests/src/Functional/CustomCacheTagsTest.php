@@ -25,7 +25,7 @@ class CustomCacheTagsTest extends BrowserTestBase {
    *
    * @var array
    */
-  public static $modules = array(
+  protected static $modules = array(
     'node',
     'views',
     'menu_ui',
@@ -60,7 +60,7 @@ class CustomCacheTagsTest extends BrowserTestBase {
 
       // Assert cache miss + expected cache contexts + tags.
       $this->drupalGet($absolute_url);
-      $this->assertEqual($this->drupalGetHeader('X-Drupal-Cache'), 'MISS');
+      $this->assertEquals('MISS', $this->getSession()->getResponseHeader('X-Drupal-Cache'));
       $this->assertCacheTags($expected_tags);
       $this->assertCacheContexts($expected_contexts);
 
@@ -74,7 +74,7 @@ class CustomCacheTagsTest extends BrowserTestBase {
       $cid = implode(':', $cid_parts);
       $cache_entry = \Drupal::cache('page')->get($cid);
       sort($cache_entry->tags);
-      $this->assertEqual($cache_entry->tags, $expected_tags);
+      $this->assertEquals($expected_tags, $cache_entry->tags);
     }
   }
 
@@ -205,10 +205,10 @@ class CustomCacheTagsTest extends BrowserTestBase {
 
 
     $this->drupalGet(Url::fromRoute('view.view_node_type_ab.page_1', array('arg_0' => 'node_type_b')));
-    $this->assertText($title);
+    $this->assertSession()->pageTextContains($title);
 
     $this->drupalGet(Url::fromRoute('view.view_node_type_ab_rest.rest_export_1', array('arg_0' => 'node_type_b'), array('query' => array('_format' => 'json'))));
-    $this->assertText($title);
+    $this->assertSession()->responseContains($title);
 
     // Save the view again, check the cache tag invalidation.
     $view_b = View::load('view_node_type_ab');
@@ -242,7 +242,7 @@ class CustomCacheTagsTest extends BrowserTestBase {
   protected function verifyPageCache(Url $url, $hit_or_miss, $tags = FALSE) {
     $this->drupalGet($url);
     $message = new FormattableMarkup('Page cache @hit_or_miss for %path.', array('@hit_or_miss' => $hit_or_miss, '%path' => $url->toString()));
-    $this->assertEqual($this->drupalGetHeader('X-Drupal-Cache'), $hit_or_miss, $message);
+    $this->assertEquals($hit_or_miss, $this->getSession()->getResponseHeader('X-Drupal-Cache'), $message);
 
     if ($hit_or_miss === 'HIT' && is_array($tags)) {
       $absolute_url = $url->setAbsolute()->toString();
@@ -252,7 +252,7 @@ class CustomCacheTagsTest extends BrowserTestBase {
       sort($cache_entry->tags);
       $tags = array_unique($tags);
       sort($tags);
-      $this->assertIdentical($cache_entry->tags, $tags);
+      $this->assertSame($cache_entry->tags, $tags);
     }
   }
 }

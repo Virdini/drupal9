@@ -57,7 +57,7 @@ class CustomTag extends Tag {
     $form['custom_tag'] = array(
       '#type' => 'textarea',
       '#title' => $this->t('Custom tag list'),
-      '#description' => $this->t('Custom tag list, separated by new lines. Caching based on custom cache tag must be manually cleared using custom code.'),
+      '#description' => $this->t('Custom tag list, separated by new lines. Caching based on custom cache tag must be manually cleared using custom code. You can use Twig (to explode a multi-value contextual filter into multiple tags for example) as long as the result delivers each tag in a separate line.'),
       '#default_value' => $this->options['custom_tag'],
     );
 
@@ -110,9 +110,10 @@ class CustomTag extends Tag {
       }
     }
 
-    $custom_tags = preg_split('/\r\n|[\r\n]/', $this->options['custom_tag']);
+    $custom_tags = $this->view->getStyle()->tokenizeValue($this->options['custom_tag'], 0);
+    $custom_tags = preg_split('/\r\n|[\r\n]/', $custom_tags);
     $custom_tags = array_map('trim', $custom_tags);
-    $custom_tags =  array_map(function ($tag){ return $this->view->getStyle()->tokenizeValue($tag, 0);}, $custom_tags);
+    $custom_tags = array_filter($custom_tags);
     return Cache::mergeTags($custom_tags, $tags);
   }
 
