@@ -32,6 +32,10 @@ class SitemapIndexUrlGenerator extends UrlGeneratorBase {
 
   /**
    * {@inheritdoc}
+   *
+   * @todo May need to implement a way of saving which sitemaps to index with
+   * each sitemap index. Right now all sitemaps that are not of a type that
+   * implements the sitemap index generator are indexed.
    */
   protected function processDataSet($data_set): array {
     if (($sitemap = SimpleSitemap::load($data_set))
@@ -40,7 +44,7 @@ class SitemapIndexUrlGenerator extends UrlGeneratorBase {
       $url_object = $sitemap->toUrl()->setAbsolute();
 
       return [
-        'loc' => $url_object->toString(),
+        'url' => $url_object->toString(),
         'lastmod' => date('c', $sitemap->fromPublished()->getCreated()),
 
         // Additional info useful in hooks.
