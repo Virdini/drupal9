@@ -13,6 +13,8 @@
 # changes.
 name: Bartik
 type: theme
+lifecycle: deprecated
+lifecycle_link: https://www.drupal.org/node/3223395#s-bartik
 base theme: false
 description: 'A flexible, recolorable theme with many regions and a responsive, mobile-first layout.'
 package: Core
@@ -74,7 +76,7 @@ regions:
   footer_fourth: 'Footer fourth'
   footer_fifth: 'Footer fifth'
 
-# Information added by Drupal.org packaging script on 2023-05-03
-version: '9.4.15'
+# Information added by Drupal.org packaging script on 2023-09-20
+version: '9.5.11'
 project: 'drupal'
-datestamp: 1683122155
+datestamp: 1695228127
