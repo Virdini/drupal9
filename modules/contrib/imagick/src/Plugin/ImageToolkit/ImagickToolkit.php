@@ -11,7 +11,6 @@ use Drupal\Core\StreamWrapper\StreamWrapperInterface;
 use Drupal\Core\StreamWrapper\StreamWrapperManager;
 use Drupal\image\Entity\ImageStyle;
 use Drupal\imagick\ImagickConst;
-use Drupal\Core\File\FileSystem;
 use Imagick;
 use ImagickPixel;
 use ImagickException;
@@ -62,18 +61,16 @@ class ImagickToolkit extends ImageToolkitBase {
   }
 
   /**
-   * ImagickToolkit constructor.
-   *
    * @param array $configuration
    * @param $plugin_id
    * @param array $plugin_definition
    * @param \Drupal\Core\ImageToolkit\ImageToolkitOperationManagerInterface $operation_manager
-   * @param \Drupal\imagick\Plugin\ImageToolkit\LoggerInterface $logger
+   * @param \Psr\Log\LoggerInterface $logger
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
-   * @param \Drupal\Core\File\FileSystem $fileSystem
+   * @param \Drupal\Core\File\FileSystemInterface $fileSystem
    * @param \Drupal\Core\StreamWrapper\StreamWrapperManager $streamWrapperManager
    */
-  public function __construct(array $configuration, $plugin_id, array $plugin_definition, ImageToolkitOperationManagerInterface $operation_manager, LoggerInterface $logger, ConfigFactoryInterface $config_factory, FileSystem $fileSystem, StreamWrapperManager $streamWrapperManager) {
+  public function __construct(array $configuration, $plugin_id, array $plugin_definition, ImageToolkitOperationManagerInterface $operation_manager, LoggerInterface $logger, ConfigFactoryInterface $config_factory, FileSystemInterface $fileSystem, StreamWrapperManager $streamWrapperManager) {
     parent::__construct($configuration, $plugin_id, $plugin_definition, $operation_manager, $logger, $config_factory);
 
     $this->fileSystem = $fileSystem;
@@ -133,6 +130,10 @@ class ImagickToolkit extends ImageToolkitBase {
   public function save($destination) {
     $resource = $this->getResource();
 
+    if (is_null($resource)) {
+      return FALSE;
+    }
+
     if ($this->isValidUri($destination)) {
       // If destination is not local, save image to temporary local file.
       if ($this->isRemoteUri($destination)) {
@@ -173,7 +174,7 @@ class ImagickToolkit extends ImageToolkitBase {
     }
 
     // Write image to destination
-    if (isset($image_format) && in_array($image_format, ['GIF'])) {
+    if (isset($image_format) && in_array($image_format, ['GIF', 'WEBP'])) {
       if (!$resource->writeImages($destination, TRUE)) {
         return FALSE;
       }
@@ -345,7 +346,7 @@ class ImagickToolkit extends ImageToolkitBase {
    * {@inheritdoc}
    */
   public static function isAvailable() {
-    return _imagick_is_available();
+    return extension_loaded('imagick');
   }
 
   /**

@@ -4,6 +4,7 @@ namespace Drupal\imagick\Plugin\ImageEffect;
 
 use Drupal\Core\Image\ImageInterface;
 use Drupal\image\ImageEffectBase;
+use Imagick;
 
 /**
  * Autorotates an image resource.
@@ -29,6 +30,33 @@ class AutorotateImageEffect extends ImageEffectBase {
       return FALSE;
     }
     return TRUE;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function transformDimensions(array &$dimensions, $uri) {
+    try {
+      $image = new Imagick($uri);
+      $orientation = $image->getImageOrientation();
+      switch ($orientation) {
+        // If the image is rotated 90° or 270°, swap the width and height.
+        case Imagick::ORIENTATION_RIGHTTOP:
+        case Imagick::ORIENTATION_LEFTTOP:
+        case Imagick::ORIENTATION_LEFTBOTTOM:
+        case Imagick::ORIENTATION_RIGHTBOTTOM:
+          $dimensions = [
+            'width' => $dimensions['height'],
+            'height' => $dimensions['width'],
+          ];
+      }
+    }
+    catch (\ImagickException $e) {
+      $this->logger->error('Image autorotate failed to transform dimensions for %uri: @message', [
+        '%uri' => $uri,
+        '@message' => $e->getMessage(),
+      ]);
+    }
   }
 
 }

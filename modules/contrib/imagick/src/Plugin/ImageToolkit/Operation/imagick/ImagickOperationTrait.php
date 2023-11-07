@@ -33,7 +33,7 @@ trait ImagickOperationTrait {
     } catch (ImagickException $e) {}
 
     $success = TRUE;
-    if (isset($image_format) && in_array($image_format, ['GIF'])) {
+    if (isset($image_format) && in_array($image_format, ['GIF', 'WEBP'])) {
       // Get each frame in the GIF
       $resource = $resource->coalesceImages();
       do {
